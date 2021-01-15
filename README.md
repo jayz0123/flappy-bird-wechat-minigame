@@ -1,2 +1,2 @@
 # flappy-bird-wechat-minigame
- a implementation on Wechat Minigame of Flappy Bird
+A implementation of Flappy Bird on wechat minigame
