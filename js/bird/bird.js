@@ -10,7 +10,7 @@ const screenHeight = window.innerHeight
 const BIRD_IMG_PREFIX = 'images/bird'
 const BIRD_WIDTH = 55
 const BIRD_HEIGHT = 55
-const SPEED_MAX = 16.5
+const SPEED_MAX = 15
 var BIRD_IMG_TYPE = ''
 
 function rnd(start, end) {
@@ -66,7 +66,7 @@ export default class Bird extends Animation {
 
   // 每帧更新鸟的位置
   update() {
-    this.speed += 0.4
+    this.speed += 0.42
 
     if (this.speed >= SPEED_MAX) {
       this.speed = SPEED_MAX
