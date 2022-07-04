@@ -13,28 +13,24 @@ const BIRD_HEIGHT = 55
 const SPEED_MAX = 16.5
 var BIRD_IMG_TYPE = ''
 
-function rnd(start, end) 
-{
+function rnd(start, end) {
   return Math.floor(Math.random() * (end - start) + start)
 }
 
-export default class Bird extends Animation
-{
-  constructor(music) 
-  {
+export default class Bird extends Animation {
+  constructor(music) {
     let color = rnd(0, 3)
 
-    switch(color)
-    {
+    switch (color) {
       case 0:
-      BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '0_'
-      break;
+        BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '0_'
+        break;
       case 1:
-      BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '1_'
-      break;
+        BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '1_'
+        break;
       case 2:
-      BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '2_'
-      break;
+        BIRD_IMG_TYPE = BIRD_IMG_PREFIX + '2_'
+        break;
     }
 
     let BIRD_IMG_SRC = BIRD_IMG_TYPE + '0.png'
@@ -55,28 +51,24 @@ export default class Bird extends Animation
   }
 
   // 拍翅膀动画
-  initFlyAnimation()
-  {
+  initFlyAnimation() {
     let frames = [];
 
     const FLY_IMG_PREFIX = BIRD_IMG_TYPE;
     const FLY_FRAME_COUNT = 4;
 
-    for (let i = 0; i < FLY_FRAME_COUNT; i++) 
-    {
+    for (let i = 0; i < FLY_FRAME_COUNT; i++) {
       frames.push(FLY_IMG_PREFIX + i + '.png')
     }
 
     this.initFrames(frames)
   }
-  
-  // 每帧更新鸟的位置
-  update()
-  {
-    this.speed += 0.5
 
-    if (this.speed >= SPEED_MAX) 
-    {
+  // 每帧更新鸟的位置
+  update() {
+    this.speed += 0.4
+
+    if (this.speed >= SPEED_MAX) {
       this.speed = SPEED_MAX
     }
 
@@ -86,18 +78,15 @@ export default class Bird extends Animation
     this.y += this.speed
   }
 
-  isTouchFloor()
-  {
+  isTouchFloor() {
     let that = this
-    if (this.y > screenHeight - 75 - this.height)
-    {
+    if (this.y > screenHeight - 75 - this.height) {
       that.music.playCollide()
       return true
     }
   }
 
-  fall()
-  {
+  fall() {
     canvas.removeEventListener('touchstart', this.tap)
 
     let that = this
@@ -105,13 +94,11 @@ export default class Bird extends Animation
 
     this.speed += 0.8
 
-    if (this.speed >= SPEED_MAX) 
-    {
+    if (this.speed >= SPEED_MAX) {
       this.speed = SPEED_MAX;
     }
 
-    if(this.y > screenHeight - 75 - this.height)
-    {
+    if (this.y > screenHeight - 75 - this.height) {
       this.y = screenHeight - 75 - this.height
       falling = false
     }
@@ -121,18 +108,16 @@ export default class Bird extends Animation
     this.y += this.speed
   }
 
-  initEvent() 
-  {
+  initEvent() {
     this.tap = this.tapToFly.bind(this)
     canvas.addEventListener('touchstart', this.tap)
   }
 
-  tapToFly(e)
-  {
+  tapToFly(e) {
     let that = this
     e.preventDefault()
 
-    this.speed = -11; 
+    this.speed = -11;
 
     that.music.playFly()
   }
